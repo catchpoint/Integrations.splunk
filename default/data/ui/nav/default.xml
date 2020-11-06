@@ -1,0 +1,15 @@
+<!-- TODO: Templatize this content -->
+<nav color="#1057A7">
+    <view name="flashtimeline" default='true' />
+    <collection label="Views">
+        <view source="unclassified" match="catchpoint_html_dashboard"/>
+        <divider />
+    </collection>
+    <collection label="Searches &amp; Reports">
+        <collection label="Reports">
+            <saved source="unclassified" match="report" />
+        </collection>
+        <divider />
+        <saved source="unclassified" />
+    </collection>
+</nav>

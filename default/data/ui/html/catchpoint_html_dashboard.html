@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Demo Dashboard</title>
+    <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="/en-US/static/@f4c1eb50e0f3/css/build/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/en-US/static/@f4c1eb50e0f3/css/build/pages/dashboard-simple-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/APP_NAME/dashboard.css" />
+</head>
+<body class="simplexml preload locale-en">
+<style type="text/css">
+    .panel-footer{
+        background-color: white !important;
+        float: right;
+        border-top: none;
+        border-radius: 4px;
+        box-shadow:0px 3px 4px 0px #ccc;
+        margin-right: 15px !important;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+</style>
+<!--
+BEGIN LAYOUT
+This section contains the layout for the dashboard. Splunk uses proprietary
+styles in <div> tags, similar to Bootstrap's grid system.
+-->
+<header>
+<a class="navSkip" href="#navSkip" tabindex="1">Screen reader users, click here to skip the navigation bar</a>
+<div class="header splunk-header">
+        <div id="placeholder-splunk-bar">
+            <a href="{{SPLUNKWEB_URL_PREFIX}}/app/launcher/home" class="brand" title="splunk > listen to your data">splunk<strong>></strong></a>
+        </div>
+            <div id="placeholder-app-bar"></div>
+</div>
+<a id="navSkip"></a>
+</header>
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="dashboard-header clearfix">
+        <h2>Catchpoint Visualization</h2>
+    </div>
+    
+    <!-- First Chart Panel with syntheic Metric and test name dropdown -->
+    <div id="panel1" class="dashboard-row dashboard-rowFirst">
+        <div id="panel1" class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel clearfix">
+                <div class="panel-element-row">
+                    <div id="row1" class="fieldset" class="dashboard-row dashboard-row1 dashboard-panel">
+                        <div class="input-dropdown" id="syntheticDD">
+                            <label>Synthetic Metrics</label>
+                        </div>
+                        <div class="input-dropdown" id="testNameDD">
+                            <label>Test Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-element-row">
+                    <div id="filed-label-chart" class="dashboard-element" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Response Time Panel -->
+    <div id="row2" class="dashboard-row dashboard-row2">
+        <div id="panel2" class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">Webpage Response (ms)</h2>
+                <div class="panel-element-row">
+                    <div id="web-page-response-chart" class="dashboard-element" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DNS Chart Panel -->
+    <div id="row3" class="dashboard-row dashboard-row3">
+        <div id="panel3" class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">DNS (ms)</h2>
+                <div class="panel-element-row">
+                    <div id="dns-chart" class="dashboard-element" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Numer of Test Runs withing index Chart Panel -->
+    <div id="row4" class="dashboard-row dashboard-row4">
+        <div id="panel4" class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">Total # of Test Runs Within Index (Grouped By Test IDs)</h2>
+                <div class="panel-element-row">
+                    <div id="total-test-runs-chart" class="dashboard-element" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--
+END LAYOUT
+-->
+
+<script src="{{SPLUNKWEB_URL_PREFIX}}/config?autoload=1"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/build/simplexml/index.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+// <![CDATA[
+
+//
+// LIBRARY REQUIREMENTS
+//
+// In the require function, we include the necessary libraries and modules for
+// the HTML dashboard. Then, we pass variable names for these libraries and
+// modules as function parameters, in order.
+//
+// When you add libraries or modules, remember to retain this mapping order
+// between the library or module and its function parameter. You can do this by
+// adding to the end of these lists, as shown in the commented examples below.
+
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/utils",
+    "splunkjs/mvc/tokenutils",
+    "underscore",
+    "jquery",
+    "splunkjs/mvc/simplexml",
+    "splunkjs/mvc/layoutview",
+    "splunkjs/mvc/simplexml/dashboardview",
+    "splunkjs/mvc/simplexml/dashboard/panelref",
+    "splunkjs/mvc/simplexml/element/chart",
+    "splunkjs/mvc/simplexml/element/event",
+    "splunkjs/mvc/simplexml/element/html",
+    "splunkjs/mvc/simplexml/element/list",
+    "splunkjs/mvc/simplexml/element/map",
+    "splunkjs/mvc/simplexml/element/single",
+    "splunkjs/mvc/simplexml/element/table",
+    "splunkjs/mvc/simpleform/formutils",
+    "splunkjs/mvc/simplexml/eventhandler",
+    "splunkjs/mvc/simplexml/searcheventhandler",
+    "splunkjs/mvc/simpleform/input/dropdown",
+    "splunkjs/mvc/simpleform/input/radiogroup",
+    "splunkjs/mvc/simpleform/input/linklist",
+    "splunkjs/mvc/simpleform/input/multiselect",
+    "splunkjs/mvc/simpleform/input/checkboxgroup",
+    "splunkjs/mvc/simpleform/input/text",
+    "splunkjs/mvc/simpleform/input/timerange",
+    "splunkjs/mvc/simpleform/input/submit",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/savedsearchmanager",
+    "splunkjs/mvc/postprocessmanager",
+    "splunkjs/mvc/simplexml/urltokenmodel"
+    // Add comma-separated libraries and modules manually here, for example:
+    // ..."splunkjs/mvc/simplexml/urltokenmodel",
+    // "splunkjs/mvc/checkboxview"
+    ],
+    function(
+        mvc,
+        utils,
+        TokenUtils,
+        _,
+        $,
+        DashboardController,
+        LayoutView,
+        Dashboard,
+        PanelRef,
+        ChartElement,
+        EventElement,
+        HtmlElement,
+        ListElement,
+        MapElement,
+        SingleElement,
+        TableElement,
+        FormUtils,
+        EventHandler,
+        SearchEventHandler,
+        DropdownInput,
+        RadioGroupInput,
+        LinkListInput,
+        MultiSelectInput,
+        CheckboxGroupInput,
+        TextInput,
+        TimeRangeInput,
+        SubmitButton,
+        SearchManager,
+        SavedSearchManager,
+        PostProcessManager,
+        UrlTokenModel
+
+        // Add comma-separated parameter names here, for example:
+        // ...UrlTokenModel,
+        // CheckboxView
+        ) {
+
+        var pageLoading = true;
+
+
+        //
+        // TOKENS
+        //
+
+        // Create token namespaces
+        var urlTokenModel = new UrlTokenModel();
+        mvc.Components.registerInstance('url', urlTokenModel);
+        var defaultTokenModel = mvc.Components.getInstance('default', {create: true});
+        var submittedTokenModel = mvc.Components.getInstance('submitted', {create: true});
+
+        urlTokenModel.on('url:navigate', function() {
+            defaultTokenModel.set(urlTokenModel.toJSON());
+            if (!_.isEmpty(urlTokenModel.toJSON()) && !_.all(urlTokenModel.toJSON(), _.isUndefined)) {
+                submitTokens();
+            } else {
+                submittedTokenModel.clear();
+            }
+        });
+
+        // Initialize tokens
+        defaultTokenModel.set(urlTokenModel.toJSON());
+
+        function submitTokens() {
+            // Copy the contents of the defaultTokenModel to the submittedTokenModel and urlTokenModel
+            FormUtils.submitForm({ replaceState: pageLoading });
+        }
+
+        function setToken(name, value) {
+            defaultTokenModel.set(name, value);
+            submittedTokenModel.set(name, value);
+        }
+
+        function unsetToken(name) {
+            defaultTokenModel.unset(name);
+            submittedTokenModel.unset(name);
+        }
+
+
+        var webPage_response_query='`catchpoint` "synthetic_metrics.Webpage Response (ms)"=*  | fields "synthetic_metrics.Webpage Response (ms)" + "test_name" | timechart avg("synthetic_metrics.Webpage Response (ms)") by "test_name" | fields "_time" + "$tok_name$"';
+        var start_search_query='`catchpoint` | fields "synthetic_metrics"."$tok_metric$" + "test_name" | timechart avg("synthetic_metrics"."$tok_metric$") by "test_name" | fields "_time" + "$tok_name$"';
+        var synthetic_DD_query = '`catchpoint` | fields "synthetic_metric*"  | fieldsummary| fields field | eval label=split(field,".") | eval field_label=mvindex(label,1)';
+        var testName_DD_query = '`catchpoint`"$tok_metric$" | fields "test_name" | fieldsummary | spath input=values path={}.value output=label | mvexpand label | fields label';
+        var dns_search_query =  '`catchpoint` "synthetic_metrics.DNS (ms)"=*   | fields "synthetic_metrics.DNS (ms)" +  "test_name" | timechart avg("synthetic_metrics.DNS (ms)") by "test_name" | fields "_time" + "$tok_name$"';
+        var total_testRun_query = '`catchpoint`| rex field=source "app_catchpoint\\:\\/\\/(?<input_name>.*)"| timechart count by source';
+        //
+        // SEARCH MANAGERS
+        //
+
+        var webPageResponse_search = new SearchManager({
+            "id": "webPageResponse_search",
+            "status_buckets": 300,
+            "search": webPage_response_query ,
+            "latest_time": "$latest$",
+            "earliest_time": "0",
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+
+        var startSearch = new SearchManager({
+            "id": "startSearch",
+            "status_buckets": 300,
+            "search": start_search_query,
+            "latest_time": "$latest$",
+            "earliest_time": "0",
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+
+        var synthetic_metricDD_search = new SearchManager({
+             "id": "synthetic_metricDD_search",
+             "latest_time": "now",
+             "earliest_time": "-24h@h",
+             "cancelOnUnload": true,
+             "status_buckets": 0,
+             "search": synthetic_DD_query,
+             "app": utils.getCurrentApp(),
+             "auto_cancel": 90,
+             "preview": true,
+             "runWhenTimeIsUndefined": false
+         }, {tokens: true});
+
+        var testNameDD_search =new SearchManager({
+            "id": "testNameDD_search",
+            "search": testName_DD_query,
+        }, {tokens: true, tokenNamespace: "submitted"});
+
+        var dns_search =new SearchManager({
+            "id": "dns_search",
+            "search": dns_search_query,
+        }, {tokens: true, tokenNamespace: "submitted"});
+
+        var totalTestRun_search =new SearchManager({
+            "id": "totalTestRun_search",
+            "search": total_testRun_query,
+        }, {tokens: true, tokenNamespace: "submitted"});
+        //
+        //
+        // SPLUNK LAYOUT
+        //
+
+        $('header').remove();
+        new LayoutView({"hideFooter": false, "hideSplunkBar": false, "hideAppBar": false, "hideChrome": false})
+            .render()
+            .getContainerElement()
+            .appendChild($('.dashboard-body')[0]);
+
+
+        //
+        // DASHBOARD EDITOR
+        //
+
+        new Dashboard({
+            id: 'dashboard',
+            el: $('.dashboard-body'),
+            showTitle: true,
+            editable: true
+        }, {tokens: true}).render();
+
+
+         var start_chart = new ChartElement({
+            "id": "start_chart",
+            "managerid": "startSearch",
+            "type": "column",
+            "charting.axisLabelsX.majorLabelStyle.overflowMode":"ellipsisNone",
+            "charting.axisLabelsX.majorLabelStyle.rotation":0,
+            "charting.axisTitleX.visibility":"visible",
+            "charting.axisTitleY.visibility":"visible",
+            "charting.axisTitleY2.visibility":"visible",
+            "charting.axisX.scale":"linear",
+            "charting.axisY.scale":"linear",
+            "charting.axisY2.enabled":false,
+            "charting.axisY2.scale":"inherit",
+            "charting.chart.bubbleMaximumSize":"50",
+            "charting.chart.bubbleMinimumSize":"10",
+            "charting.chart.bubbleSizeBy":"area",
+            "charting.chart.nullValueMode":"gaps",
+            "charting.chart.sliceCollapsingThreshold":0.01,
+            "charting.chart.stackMode":"default",
+            "charting.chart.style":"shiny",
+            "charting.drilldown":"all",
+            "charting.layout.splitSeries":0,
+            "charting.legend.labelStyle.overflowMode":"ellipsisMiddle",
+            "charting.legend.placement":"right",
+            "el": $('#filed-label-chart')
+        }, {tokens: true}).render();
+
+
+        var webpageResponse_chart = new ChartElement({
+            "id": "webpageResponse_chart",
+            "managerid": "webPageResponse_search",
+            "type": "column",
+            "charting.axisLabelsX.majorLabelStyle.overflowMode":"ellipsisNone",
+            "charting.axisLabelsX.majorLabelStyle.rotation":0,
+            "charting.axisTitleX.visibility":"visible",
+            "charting.axisTitleY.visibility":"visible",
+            "charting.axisTitleY2.visibility":"visible",
+            "charting.axisX.scale":"linear",
+            "charting.axisY.scale":"linear",
+            "charting.axisY2.enabled":false,
+            "charting.axisY2.scale":"inherit",
+            "charting.chart.bubbleMaximumSize":"50",
+            "charting.chart.bubbleMinimumSize":"10",
+            "charting.chart.bubbleSizeBy":"area",
+            "charting.chart.nullValueMode":"gaps",
+            "charting.chart.sliceCollapsingThreshold":0.01,
+            "charting.chart.stackMode":"default",
+            "charting.chart.style":"shiny",
+            "charting.drilldown":"all",
+            "charting.layout.splitSeries":0,
+            "charting.legend.labelStyle.overflowMode":"ellipsisMiddle",
+            "charting.legend.placement":"right",
+            "el": $('#web-page-response-chart')
+        }, {tokens: true}).render();
+
+
+        var dns_Chart = new ChartElement({
+             "id": "dns_Chart",
+            "managerid": "dns_search",
+            "type": "column",
+            "charting.axisLabelsX.majorLabelStyle.overflowMode":"ellipsisNone",
+            "charting.axisLabelsX.majorLabelStyle.rotation":0,
+            "charting.axisTitleX.visibility":"visible",
+            "charting.axisTitleY.visibility":"visible",
+            "charting.axisTitleY2.visibility":"visible",
+            "charting.axisX.scale":"linear",
+            "charting.axisY.scale":"linear",
+            "charting.axisY2.enabled":false,
+            "charting.axisY2.scale":"inherit",
+            "charting.chart.bubbleMaximumSize":"50",
+            "charting.chart.bubbleMinimumSize":"10",
+            "charting.chart.bubbleSizeBy":"area",
+            "charting.chart.nullValueMode":"gaps",
+            "charting.chart.sliceCollapsingThreshold":0.01,
+            "charting.chart.stackMode":"default",
+            "charting.chart.style":"shiny",
+            "charting.drilldown":"all",
+            "charting.layout.splitSeries":0,
+            "charting.legend.labelStyle.overflowMode":"ellipsisMiddle",
+            "charting.legend.placement":"right",
+            "el": $('#dns-chart')
+        }, {tokens: true}).render();
+
+        var totalTestRun_chart = new ChartElement({
+             "id": "totalTestRun_chart",
+            "managerid": "totalTestRun_search",
+            "type": "column",
+            "charting.axisLabelsX.majorLabelStyle.overflowMode":"ellipsisNone",
+            "charting.axisLabelsX.majorLabelStyle.rotation":0,
+            "charting.axisTitleX.visibility":"visible",
+            "charting.axisTitleY.visibility":"visible",
+            "charting.axisTitleY2.visibility":"visible",
+            "charting.axisX.scale":"linear",
+            "charting.axisY.scale":"linear",
+            "charting.axisY2.enabled":false,
+            "charting.axisY2.scale":"inherit",
+            "charting.chart.bubbleMaximumSize":"50",
+            "charting.chart.bubbleMinimumSize":"10",
+            "charting.chart.bubbleSizeBy":"area",
+            "charting.chart.nullValueMode":"gaps",
+            "charting.chart.sliceCollapsingThreshold":0.01,
+            "charting.chart.stackMode":"default",
+            "charting.chart.style":"shiny",
+            "charting.drilldown":"all",
+            "charting.layout.splitSeries":0,
+            "charting.legend.labelStyle.overflowMode":"ellipsisMiddle",
+            "charting.legend.placement":"right",
+            "el": $('#total-test-runs-chart')
+        }, {tokens: true}).render();
+        //
+        // VIEWS: FORM INPUTS
+        //
+        var defaultUpdate = {};
+
+        var syntheticDD=new DropdownInput({
+            "id": "syntheticDD",
+            "managerid": "synthetic_metricDD_search",
+            "labelField": "field_label",
+             "selectFirstChoice": false,
+             "valueField": "field_label",
+             "showClearButton": true,
+             "searchWhenChanged": true,
+             "value": "$tok_metric$",
+             "default" : "DNS (ms)",
+            "el": $('#syntheticDD')
+        }, {tokens: true}).render();
+
+        syntheticDD.on("change", function(value, input, options) {
+            FormUtils.handleValueChange(syntheticDD);
+        });
+     
+        var defaultTokenModel = mvc.Components.get("default");
+
+        defaultTokenModel.on("change:tok_metric", function(formQuery, tok_metric) {
+           console.log("formQuery,tok_metric",formQuery,tok_metric);
+            // Update the $searchQuery$ token value
+            defaultTokenModel.set('tok_metric', tok_metric);
+        });
+
+        var testNameDD=new DropdownInput({
+            "id": "testNameDD",
+            "managerid": "testNameDD_search",
+            "labelField": "label",
+             "selectFirstChoice": false,
+             "valueField": "label",
+             "showClearButton": true,
+             "searchWhenChanged": true,
+             "default" : "*",
+             "value": "$tok_name$",
+            "el": $('#testNameDD')
+        }, {tokens: true}).render();
+
+        testNameDD.on("change", function(value, input, options) {
+           FormUtils.handleValueChange(testNameDD);
+        });
+
+        var defaultTokenModel = mvc.Components.get("default");
+
+        defaultTokenModel.on("change:tok_name", function(formQuery, tok_name) {
+           console.log("formQuery,tok_name",formQuery,tok_name);
+            // Update the $searchQuery$ token value
+            defaultTokenModel.set('tok_name', tok_name);
+        });
+       
+        // Initialize time tokens to default
+        if (!defaultTokenModel.has('earliest') && !defaultTokenModel.has('latest')) {
+            defaultTokenModel.set({ earliest: '0', latest: '' });
+        }
+
+        submitTokens();
+
+
+        //
+        // DASHBOARD READY
+        //
+
+        DashboardController.ready();
+        pageLoading = false;
+
+    }
+);
+// ]]>
+</script>
+</body>
+</html>

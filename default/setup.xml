@@ -1,0 +1,110 @@
+<setup>
+   <block title="Credential Setup (* fields are required)" endpoint="storage/passwords" entity="_new">
+     <input field="name">
+          <label>Catchpoint OAuth2 Client Secret*</label>
+          <type>text</type>
+     </input>
+      <input field="password">
+           <label>Catchpoint OAuth2 Client Key*</label>
+           <type>password</type>
+      </input>
+   </block>
+
+  <block title="Catchpoint Setup (* fields are required)" endpoint="catchpoint_setup/catchpoint_account" entity="catchpoint_account">
+      <input field="url">
+          <label>Catchpoint API URL*</label>
+          <type>text</type>
+      </input>
+      <input field="client_secret">
+          <label>  </label>
+          <type>text</type>
+      </input>
+      <input field="access_token">
+          <label>  </label>
+          <type>text</type>
+      </input>
+      <input field="expires_in">
+          <label>  </label>
+          <type>text</type>
+      </input>
+      <input field="endpoint_uri">
+          <label>  </label>
+          <type>text</type>
+      </input>
+      <input field="is_refreshed">
+          <label>  </label>
+          <type>text</type>
+      </input>
+      <input field="tid_store">
+          <label>  </label>
+          <type>text</type>
+      </input>
+      <text>
+          <![CDATA[ <script type="text/javascript">
+          
+            $(function() {
+              var confirm_label = $("label[for='/storage/passwords/_new/password_id_confirm']");
+              confirm_label.text("Catchpoint OAuth2 Client Key (Confirm)*");
+
+              $(".splButton-secondary").hide();
+
+              var url = $("#\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/url_id");
+              var access_token = $("#\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/access_token_id");
+              var client_identifier = $("#\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/client_secret_id");
+              var expires_in = $("#\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/expires_in_id");
+              var endpoint_uri = $("#\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/endpoint_uri_id");
+              var is_refreshed = $("#\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/is_refreshed_id");
+              var tid_store = $("#\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/tid_store_id");
+
+          
+              var client_secret = $("#\\/storage\\/passwords\\/_new\\/name_id");
+              client_secret.keyup(function(){
+                              client_identifier.val(client_secret.val());
+                                      })
+              
+              var returned_token = "";
+              var testing = 0;
+              url.prop("readonly", true);
+              url.css("background-color", "#DEDEDE");
+       
+              access_token.hide();
+              expires_in.hide();
+              client_identifier.hide();
+              endpoint_uri.hide();
+              is_refreshed.hide();
+              tid_store.hide();
+              access_token.clearInputs();
+
+              // Get access token
+              // Show Pass or Error Message
+              var show_granted_msg = function(msg, color) {
+                  var granted_msg = $("label[for='/catchpoint_setup/catchpoint_account/catchpoint_account/access_token_id']");
+                  granted_msg.text(msg);
+                  granted_msg.css("color", color);
+                  granted_msg.css("font-weight","Bold");
+              };
+
+              var show_error = function(id, msg) {
+                  var component = $(id);
+                  var widgeterror = $(".widgeterror", component);
+                  widgeterror.text(msg);
+                  widgeterror.attr("style", "display: block;");
+                  return false;
+              };
+
+              var add_index_link = function(append_id) {
+                  var append_obj = $(append_id);
+                  append_obj.append("<div id=\"index_link\"><br>Note:<ul><li><p>An index named \"catchpoint\" has been added automatically with default settings. <br>To change the size or other settings of this index, copy the stanza labeled [catchpoint]<br> in <APP_HOME>/default/index.conf to the <APP_HOME>/local/index.conf and make changes as needed. </p></li></ul></div>")
+              };
+
+              $(document).ready(function(){
+                  var submit_btn = $(".splButton-primary");
+                  submit_btn.text("Save and Authenticate");
+                  add_index_link("#item-\\/catchpoint_setup\\/catchpoint_account\\/catchpoint_account\\/access_token");
+              });
+
+            });
+          </script> ]]>
+      </text>
+  </block>
+</setup>
