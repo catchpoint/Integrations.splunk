@@ -29,7 +29,7 @@ class Splunk_Integration_ModInput(Script):
             name = "client_identifier",
             description = "Client Secret from Catchpoint Portal for a particular division or client.",
             data_type = Argument.data_type_string,
-            required_on_edit = True,
+            required_on_edit = False,
             required_on_create = True
         )
 

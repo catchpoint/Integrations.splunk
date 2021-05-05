@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Catchpoint - Test Times </title>
+    <link rel="shortcut icon" href="/en-US/static/@1815D4259DE2154EC8702DB84ED0BA22132C5713C225770EF3662E70677B0EFD/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/build/css/bootstrap-enterprise.css" />
+    <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/build/css/splunkjs-dashboard.css" />
+
+
+        <meta name="referrer" content="never" />
+        <meta name="referrer" content="no-referrer" />
+    
+        <script>
+            (function () {
+                window._splunk_metrics_events = [];
+                window._splunk_metrics_events.active = true;
+
+                function onLoadSwa() {
+                    new SWA({"deploymentID": "328394cc-7bba-5e64-821c-589f03fe56e4", "userID": "ab5838cf588deeadf84f762a928fc8587924b8d9c313bd6147b8f72e8d506dca", "version": "4", "instanceGUID": "5A129190-F43B-476C-8E2A-413E36A53413", "visibility": "anonymous,support", "url": "https://e1345286.api.splkmobile.com/1.0/e1345286"});
+                };
+
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = '/en-US/static/app/splunk_instrumentation/build/pages/swa.js';
+                    s.addEventListener('load', onLoadSwa);
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                });
+            }());
+        </script>
+    </head>
+<body class="simplexml preload locale-en" data-splunk-version="8.0.6" data-splunk-product="enterprise">
+<!--
+BEGIN LAYOUT
+This section contains the layout for the dashboard. Splunk uses proprietary
+styles in <div> tags, similar to Bootstrap's grid system.
+-->
+<header>
+    <a aria-label="Screen reader users, click here to skip the navigation bar" class="navSkip" href="#navSkip" tabIndex="1">Skip Navigation &gt;</a>
+    <div class="header splunk-header">
+            <div id="placeholder-splunk-bar">
+                <a href="{{SPLUNKWEB_URL_PREFIX}}/app/launcher/home" class="brand" title="splunk &gt; listen to your data">splunk<strong>&gt;</strong></a>
+            </div>
+                <div id="placeholder-app-bar"></div>
+    </div>
+    <a id="navSkip"></a>
+</header>
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="dashboard-header clearfix">
+        <h2>Catchpoint - Test Times </h2>
+    </div>
+    <div class="fieldset">
+        <div class="input input-dropdown" id="input1">
+            <label>Test Name</label>
+        </div>
+        <div class="input input-dropdown" id="input2">
+            <label>Node Name</label>
+        </div>
+        <div class="input input-dropdown" id="input3">
+            <label># Step</label>
+        </div>
+    </div>
+
+
+    <div id="row1" class="dashboard-row dashboard-row1">
+        <div id="panel1" class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">Document Complete</h2>
+                
+                <div class="panel-element-row">
+                    <div id="element1" class="dashboard-element chart" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="panel2" class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">Test Time</h2>
+                
+                <div class="panel-element-row">
+                    <div id="element2" class="dashboard-element chart" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="row2" class="dashboard-row dashboard-row2">
+        <div id="panel3" class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">Dom Load</h2>
+                
+                <div class="panel-element-row">
+                    <div id="element3" class="dashboard-element chart" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="panel4" class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">Content Load</h2>
+                
+                <div class="panel-element-row">
+                    <div id="element4" class="dashboard-element chart" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="row3" class="dashboard-row dashboard-row3">
+        <div id="panel5" class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">Css Load (ms)</h2>
+                
+                <div class="panel-element-row">
+                    <div id="element5" class="dashboard-element table" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="panel6" class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel clearfix">
+                <h2 class="panel-title">HTML Load (ms)</h2>
+                
+                <div class="panel-element-row">
+                    <div id="element6" class="dashboard-element table" style="width: 100%">
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+END LAYOUT
+-->
+
+<script src="{{SPLUNKWEB_URL_PREFIX}}/config?autoload=1" crossorigin="use-credentials"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/build/simplexml/index.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+// <![CDATA[
+//
+// LIBRARY REQUIREMENTS
+//
+// In the require function, we include the necessary libraries and modules for
+// the HTML dashboard. Then, we pass variable names for these libraries and
+// modules as function parameters, in order.
+//
+// When you add libraries or modules, remember to retain this mapping order
+// between the library or module and its function parameter. You can do this by
+// adding to the end of these lists, as shown in the commented examples below.
+
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/utils",
+    "splunkjs/mvc/tokenutils",
+    "underscore",
+    "jquery",
+    "splunkjs/mvc/simplexml",
+    "splunkjs/mvc/layoutview",
+    "splunkjs/mvc/simplexml/dashboardview",
+    "splunkjs/mvc/simplexml/dashboard/panelref",
+    "splunkjs/mvc/simplexml/element/chart",
+    "splunkjs/mvc/simplexml/element/event",
+    "splunkjs/mvc/simplexml/element/html",
+    "splunkjs/mvc/simplexml/element/list",
+    "splunkjs/mvc/simplexml/element/map",
+    "splunkjs/mvc/simplexml/element/single",
+    "splunkjs/mvc/simplexml/element/table",
+    "splunkjs/mvc/simplexml/element/visualization",
+    "splunkjs/mvc/simpleform/formutils",
+    "splunkjs/mvc/simplexml/eventhandler",
+    "splunkjs/mvc/simplexml/searcheventhandler",
+    "splunkjs/mvc/simpleform/input/dropdown",
+    "splunkjs/mvc/simpleform/input/radiogroup",
+    "splunkjs/mvc/simpleform/input/linklist",
+    "splunkjs/mvc/simpleform/input/multiselect",
+    "splunkjs/mvc/simpleform/input/checkboxgroup",
+    "splunkjs/mvc/simpleform/input/text",
+    "splunkjs/mvc/simpleform/input/timerange",
+    "splunkjs/mvc/simpleform/input/submit",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/savedsearchmanager",
+    "splunkjs/mvc/postprocessmanager",
+    "splunkjs/mvc/simplexml/urltokenmodel"
+    // Add comma-separated libraries and modules manually here, for example:
+    // ..."splunkjs/mvc/simplexml/urltokenmodel",
+    // "splunkjs/mvc/tokenforwarder"
+    ],
+    function(
+        mvc,
+        utils,
+        TokenUtils,
+        _,
+        $,
+        DashboardController,
+        LayoutView,
+        Dashboard,
+        PanelRef,
+        ChartElement,
+        EventElement,
+        HtmlElement,
+        ListElement,
+        MapElement,
+        SingleElement,
+        TableElement,
+        VisualizationElement,
+        FormUtils,
+        EventHandler,
+        SearchEventHandler,
+        DropdownInput,
+        RadioGroupInput,
+        LinkListInput,
+        MultiSelectInput,
+        CheckboxGroupInput,
+        TextInput,
+        TimeRangeInput,
+        SubmitButton,
+        SearchManager,
+        SavedSearchManager,
+        PostProcessManager,
+        UrlTokenModel
+
+        // Add comma-separated parameter names here, for example:
+        // ...UrlTokenModel,
+        // TokenForwarder
+        ) {
+
+        var pageLoading = true;
+
+
+        //
+        // TOKENS
+        //
+
+        // Create token namespaces
+        var urlTokenModel = new UrlTokenModel();
+        mvc.Components.registerInstance('url', urlTokenModel);
+        var defaultTokenModel = mvc.Components.getInstance('default', {create: true});
+        var submittedTokenModel = mvc.Components.getInstance('submitted', {create: true});
+
+        urlTokenModel.on('url:navigate', function() {
+            defaultTokenModel.set(urlTokenModel.toJSON());
+            if (!_.isEmpty(urlTokenModel.toJSON()) && !_.all(urlTokenModel.toJSON(), _.isUndefined)) {
+                submitTokens();
+            } else {
+                submittedTokenModel.clear();
+            }
+        });
+
+        // Initialize tokens
+        defaultTokenModel.set(urlTokenModel.toJSON());
+
+        function submitTokens() {
+            // Copy the contents of the defaultTokenModel to the submittedTokenModel and urlTokenModel
+            FormUtils.submitForm({ replaceState: pageLoading });
+        }
+
+        function setToken(name, value) {
+            defaultTokenModel.set(name, value);
+            submittedTokenModel.set(name, value);
+        }
+
+        function unsetToken(name) {
+            defaultTokenModel.unset(name);
+            submittedTokenModel.unset(name);
+        }
+
+
+
+        //
+        // SEARCH MANAGERS
+        //
+
+        
+var search1 = new SearchManager({
+            "id": "search1",
+            "earliest_time": "rt-1h",
+            "latest_time": "rt",
+            "sample_ratio": 1,
+            "search": "index=\"catchpoint\"  | spath output=Document_Complete path=\"synthetic_metrics.Document Complete (ms)\" | spath output=TestName path=test_name  | spath output=NodeName path=node_name  | spath output=step path=step | regex NodeName=\"^$NodeName$$\" | regex TestName=\"^$TestName$$\" | where (step=$$step$$ OR isnull(step)) | eval step_label = if(match(step, \"\\d+\"), \"# Step : \" + step,\"\") | eval Dimensions=TestName + \"#\" + NodeName + step_label | timechart cont=false span=1m latest(Document_Complete)  by Dimensions",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+        
+var search2 = new SearchManager({
+            "id": "search2",
+            "earliest_time": "rt-1h",
+            "latest_time": "rt",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\"  | spath output=Test_Time path=\"synthetic_metrics.Test Time (ms)\" | spath output=TestName path=test_name  | spath output=NodeName path=node_name  | spath output=step path=step | regex NodeName=\"^$NodeName$$\" | regex TestName=\"^$TestName$$\" | where (step=$$step$$ OR isnull(step)) | eval step_label = if(match(step, \"\\d+\"), \"# Step : \" + step,\"\") | eval Dimensions=TestName + \"#\" + NodeName + step_label | timechart cont=false span=1m latest(Test_Time)  by Dimensions",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+        
+var search3 = new SearchManager({
+            "id": "search3",
+            "earliest_time": "rt-1h",
+            "latest_time": "rt",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\"  | spath output=DOMLoad path=\"synthetic_metrics.DOM Load (ms)\" | spath output=TestName path=test_name  | spath output=NodeName path=node_name  | spath output=step path=step | regex NodeName=\"^$NodeName$$\" | regex TestName=\"^$TestName$$\" | where (step=$$step$$ OR isnull(step)) | eval step_label = if(match(step, \"\\d+\"), \"# Step : \" + step,\"\") | eval Dimensions=TestName + \"#\" + NodeName + step_label | timechart cont=false span=1m latest(DOMLoad)  by Dimensions",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+        
+var search4 = new SearchManager({
+            "id": "search4",
+            "earliest_time": "rt-1h",
+            "latest_time": "rt",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\"  | spath output=Content_Load path=\"synthetic_metrics.Content Load (ms)\" | spath output=TestName path=test_name  | spath output=NodeName path=node_name  | spath output=step path=step | regex NodeName=\"^$NodeName$$\" | regex TestName=\"^$TestName$$\" | where (step=$$step$$ OR isnull(step)) | eval step_label = if(match(step, \"\\d+\"), \"# Step : \" + step,\"\") | eval Dimensions=TestName + \"#\" + NodeName + step_label | timechart cont=false span=1m latest(Content_Load)  by Dimensions",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+        
+var search5 = new SearchManager({
+            "id": "search5",
+            "earliest_time": "-24h@h",
+            "latest_time": "now",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\"  | spath output=Css path=\"synthetic_metrics.Css (ms)\" | spath output=TestName path=test_name  | spath output=NodeName path=node_name  | spath output=step path=step | regex NodeName=\"^$NodeName$$\" | regex TestName=\"^$TestName$$\" | where (step=$$step$$ OR isnull(step)) | eval step_label = if(match(step, \"\\d+\"), \"# Step : \" + step,\"\") | stats avg(Css) as Response_Time  by TestName NodeName | eval Response_Time = round(Response_Time,2) | table TestName,NodeName, Response_Time | sort limit=10 -Response_Time | fillnull",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+        
+var search6 = new SearchManager({
+            "id": "search6",
+            "earliest_time": "-24h@h",
+            "latest_time": "now",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\"  | spath output=Html path=\"synthetic_metrics.Html (ms)\" | spath output=TestName path=test_name  | spath output=NodeName path=node_name  | spath output=step path=step | regex NodeName=\"^$NodeName$$\" | regex TestName=\"^$TestName$$\" | where (step=$$step$$ OR isnull(step)) | eval step_label = if(match(step, \"\\d+\"), \"# Step : \" + step,\"\") | stats avg(Html) as Response_Time  by TestName NodeName | eval Response_Time = round(Response_Time,2) | table TestName,NodeName, Response_Time | sort limit=10 -Response_Time | fillnull",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true, tokenNamespace: "submitted"});
+        
+var search7 = new SearchManager({
+            "id": "search7",
+            "earliest_time": "-24h@h",
+            "latest_time": "now",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\" | spath output=TestName path=test_name | sort TestName |dedup TestName",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true});
+        
+var search8 = new SearchManager({
+            "id": "search8",
+            "earliest_time": "-24h@h",
+            "latest_time": "now",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\"  | spath output=NodeName path=node_name | spath output=TestName path=test_name | regex TestName=\"^$TestName$$\" | sort NodeName  |dedup NodeName",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true});
+        
+var search9 = new SearchManager({
+            "id": "search9",
+            "earliest_time": "-24h@h",
+            "latest_time": "now",
+            "sample_ratio": null,
+            "search": "index=\"catchpoint\"  | spath output=step path=step  | spath output=TestName path=test_name  | regex TestName=\"^$TestName$$\" | where step != \"\" | dedup step",
+            "status_buckets": 0,
+            "cancelOnUnload": true,
+            "app": utils.getCurrentApp(),
+            "auto_cancel": 90,
+            "preview": true,
+            "tokenDependencies": {
+            },
+            "runWhenTimeIsUndefined": false
+        }, {tokens: true});
+
+
+        //
+        // SPLUNK LAYOUT
+        //
+
+        $('header').remove();
+        new LayoutView({"hideChrome": false, "hideSplunkBar": false, "hideAppBar": false})
+            .render()
+            .getContainerElement()
+            .appendChild($('.dashboard-body')[0]);
+
+        //
+        // DASHBOARD EDITOR
+        //
+
+        new Dashboard({
+            id: 'dashboard',
+            el: $('.dashboard-body'),
+            showTitle: true,
+            editable: true
+        }, {tokens: true}).render();
+
+
+        //
+        // VIEWS: VISUALIZATION ELEMENTS
+        //
+
+        var element1 = new ChartElement({
+            "id": "element1",
+            "resizable": true,
+            "charting.axisLabelsX.majorLabelStyle.overflowMode": "ellipsisNone",
+            "charting.axisLabelsX.majorLabelStyle.rotation": "0",
+            "charting.axisTitleX.visibility": "visible",
+            "charting.axisTitleY.visibility": "visible",
+            "charting.axisTitleY2.visibility": "visible",
+            "charting.axisX.abbreviation": "none",
+            "charting.axisX.scale": "linear",
+            "charting.axisY.abbreviation": "none",
+            "charting.axisY.scale": "linear",
+            "charting.axisY2.abbreviation": "none",
+            "charting.axisY2.enabled": "0",
+            "charting.axisY2.scale": "inherit",
+            "charting.chart": "column",
+            "charting.chart.bubbleMaximumSize": "50",
+            "charting.chart.bubbleMinimumSize": "10",
+            "charting.chart.bubbleSizeBy": "area",
+            "charting.chart.nullValueMode": "gaps",
+            "charting.chart.showDataLabels": "none",
+            "charting.chart.sliceCollapsingThreshold": "0.01",
+            "charting.chart.stackMode": "default",
+            "charting.chart.style": "shiny",
+            "charting.drilldown": "none",
+            "charting.layout.splitSeries": "0",
+            "charting.layout.splitSeries.allowIndependentYRanges": "0",
+            "charting.legend.labelStyle.overflowMode": "ellipsisMiddle",
+            "charting.legend.mode": "standard",
+            "charting.legend.placement": "right",
+            "charting.lineWidth": "2",
+            "refresh.display": "progressbar",
+            "trellis.enabled": "0",
+            "trellis.scales.shared": "1",
+            "trellis.size": "medium",
+            "managerid": "search1",
+            "el": $('#element1')
+        }, {tokens: true, tokenNamespace: "submitted"}).render();
+
+
+        var element2 = new ChartElement({
+            "id": "element2",
+            "resizable": true,
+            "charting.chart": "column",
+            "charting.drilldown": "none",
+            "refresh.display": "progressbar",
+            "managerid": "search2",
+            "el": $('#element2')
+        }, {tokens: true, tokenNamespace: "submitted"}).render();
+
+
+        var element3 = new ChartElement({
+            "id": "element3",
+            "resizable": true,
+            "charting.chart": "column",
+            "charting.drilldown": "none",
+            "refresh.display": "progressbar",
+            "managerid": "search3",
+            "el": $('#element3')
+        }, {tokens: true, tokenNamespace: "submitted"}).render();
+
+
+        var element4 = new ChartElement({
+            "id": "element4",
+            "resizable": true,
+            "charting.chart": "column",
+            "charting.drilldown": "none",
+            "refresh.display": "progressbar",
+            "managerid": "search4",
+            "el": $('#element4')
+        }, {tokens: true, tokenNamespace: "submitted"}).render();
+
+
+        var element5 = new TableElement({
+            "id": "element5",
+            "drilldown": "none",
+            "refresh.display": "progressbar",
+            "managerid": "search5",
+            "el": $('#element5')
+        }, {tokens: true, tokenNamespace: "submitted"}).render();
+
+        var element6 = new TableElement({
+            "id": "element6",
+            "drilldown": "none",
+            "refresh.display": "progressbar",
+            "managerid": "search6",
+            "el": $('#element6')
+        }, {tokens: true, tokenNamespace: "submitted"}).render();
+
+
+        //
+        // VIEWS: FORM INPUTS
+        //
+
+        var input1 = new DropdownInput({
+            "id": "input1",
+            "choices": [
+                {"label": "All Tests", "value": "(.*?)"}
+            ],
+            "default": "(.*?)",
+            "searchWhenChanged": true,
+            "labelField": "TestName",
+            "valueField": "TestName",
+            "selectFirstChoice": false,
+            "showClearButton": true,
+            "value": "$form.TestName$",
+            "managerid": "search7",
+            "el": $('#input1')
+        }, {tokens: true}).render();
+
+        input1.on("change", function(newValue) {
+            FormUtils.handleValueChange(input1);
+        });
+        
+        var input2 = new DropdownInput({
+            "id": "input2",
+            "choices": [
+                {"label": "All Nodes", "value": "(.*?)"}
+            ],
+            "searchWhenChanged": true,
+            "labelField": "NodeName",
+            "valueField": "NodeName",
+            "selectFirstChoice": false,
+            "showClearButton": true,
+            "initialValue": "(.*?)",
+            "value": "$form.NodeName$",
+            "managerid": "search8",
+            "el": $('#input2')
+        }, {tokens: true}).render();
+
+        input2.on("change", function(newValue) {
+            FormUtils.handleValueChange(input2);
+        });
+        
+        var input3 = new DropdownInput({
+            "id": "input3",
+            "choices": [
+                {"label": "Select Step", "value": "NULL"}
+            ],
+            "searchWhenChanged": true,
+            "labelField": "step",
+            "valueField": "step",
+            "selectFirstChoice": false,
+            "showClearButton": true,
+            "value": "$form.step$",
+            "managerid": "search9",
+            "el": $('#input3')
+        }, {tokens: true}).render();
+
+        input3.on("change", function(newValue) {
+            FormUtils.handleValueChange(input3);
+        });
+        
+        DashboardController.onReady(function() {
+            if (!submittedTokenModel.has('earliest') && !submittedTokenModel.has('latest')) {
+                submittedTokenModel.set({ earliest: '0', latest: '' });
+            }
+        });
+
+        // Initialize time tokens to default
+        if (!defaultTokenModel.has('earliest') && !defaultTokenModel.has('latest')) {
+            defaultTokenModel.set({ earliest: '0', latest: '' });
+        }
+
+        if (!_.isEmpty(urlTokenModel.toJSON())){
+            submitTokens();
+        }
+
+
+        //
+        // DASHBOARD READY
+        //
+
+        DashboardController.ready();
+        pageLoading = false;
+
+    }
+);
+// ]]>
+</script>
+</body>
+</html>

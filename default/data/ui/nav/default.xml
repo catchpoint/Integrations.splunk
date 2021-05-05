@@ -2,8 +2,20 @@
 <nav color="#1057A7">
     <view name="flashtimeline" default='true' />
     <collection label="Views">
-        <view source="unclassified" match="catchpoint_html_dashboard"/>
+        <view source="unclassified"  match="catchpoint_html_dashboard"/>
         <divider />
+        <view source="unclassified"  match="catchpoint_overview"/>
+        <divider />
+        <view source="unclassified"  match="catchpoint_recent_errors"/>
+        <divider />
+        <view source="unclassified"  match="catchpoint_response_size"/>
+        <divider />
+        <view source="unclassified"  match="catchpoint_test_times"/>
+        <divider />
+        <view source="unclassified"  match="catchpoint_alerts"/>
+        <divider />
+
+        
     </collection>
     <collection label="Searches &amp; Reports">
         <collection label="Reports">
